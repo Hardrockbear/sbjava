@@ -31,7 +31,7 @@ public class App
                 System.out.println("Введите сторону:");
                 double side = scanner.nextDouble();
 
-                figure = new Rectangle(side, side);
+                figure = new Square(side);
                 break;
             case 3:
                 System.out.println("Введите первую сторону:");
