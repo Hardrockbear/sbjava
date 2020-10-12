@@ -21,12 +21,12 @@ public class Triangle implements Figure{
     }
 
     @Override
-    public double P() {
+    public double p() {
         return a + b + c;
     }
 
     @Override
-    public double Sq() {
+    public double sq() {
         return 0.5 * a * b * sin(angle);
     }
 }

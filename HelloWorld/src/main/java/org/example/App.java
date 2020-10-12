@@ -49,6 +49,6 @@ public class App
                 throw new RuntimeException("Некорректный выбор");
         }
 
-        System.out.println("Площадь фигуры = " + figure.Sq() + ". Периметр фигуры = " + figure.P());
+        System.out.println("Площадь фигуры = " + figure.sq() + ". Периметр фигуры = " + figure.p());
     }
 }

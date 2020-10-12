@@ -15,12 +15,12 @@ public class Rectangle implements Figure{
     }
 
     @Override
-    public double P() {
+    public double p() {
         return (length + width) * 2;
     }
 
     @Override
-    public double Sq() {
+    public double sq() {
         return length * width;
     }
 }
