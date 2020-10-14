@@ -58,26 +58,30 @@ class MyListTest {
         assertEquals( 6, list.size() );
     }
 
-    @DisplayName("возвращать false если удаление по элементу не удалось")
+    @DisplayName("достать первый элемент из очереди")
     @Test
     public void testPoll() {
+        assertEquals(Integer.valueOf(1), list.poll() );
+    }
 
-        assertEquals( T, list.poll() );
+    @DisplayName("достать первый элемент из очереди")
+    @Test
+    public void testPollNull() {
+        MyList<Integer> emptyList = new MyLinkedList<>();
+        assertNull(emptyList.poll() );
     }
 
     @DisplayName("корректно сортировать Integer")
     @Test
-    public void testSort() {
-        list.add( 6 );
-        list.add( 4 );
-        // 1,2,10,6,4
-        list.sort();
+    public void testMySort() {
+        list.mySort();
 
-        assertEquals( 5, list.size() );
+        assertEquals( 6, list.size() );
         assertEquals( Integer.valueOf( 1 ), list.get( 0 ) );
-        assertEquals( Integer.valueOf( 2 ), list.get( 1 ) );
-        assertEquals( Integer.valueOf( 4 ), list.get( 2 ) );
-        assertEquals( Integer.valueOf( 6 ), list.get( 3 ) );
+        assertEquals( Integer.valueOf( 1 ), list.get( 1 ) );
+        assertEquals( Integer.valueOf( 2 ), list.get( 2 ) );
+        assertEquals( Integer.valueOf( 2 ), list.get( 3 ) );
         assertEquals( Integer.valueOf( 10 ), list.get( 4 ) );
+        assertEquals( Integer.valueOf( 30 ), list.get( 5 ) );
     }
 }

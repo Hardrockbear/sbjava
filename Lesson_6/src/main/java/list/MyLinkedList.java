@@ -1,5 +1,7 @@
 package list;
 
+import java.util.Arrays;
+
 public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue<T> {
     private ListItem<T> head = null;
     private ListItem<T> tail = null;
@@ -33,19 +35,19 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
 
     @Override
     public T get( int index ) {
-        // TODO Ошибка если индекс больше размера
-        // DONE
         if(index > size()) {
             throw new RuntimeException("Индекс за границей массива");
         }
 
-        // TODO Если индекс > size/2 - то перебираем от tail
-        // DONE
+        return (T) getItem(index).value;
+    }
+
+    public ListItem getItem (int index){
         int currPosition;
         T result = null;
         ListItem<T> item;
 
-        boolean searchFromTail = index > size / 2 ? true : false;
+        boolean searchFromTail = index > size / 2;
 
         item = searchFromTail ? tail : head;
         currPosition = searchFromTail ? size - 1 : 0;
@@ -54,7 +56,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
             // Пошли перебирать элементы пока не дойдем до индекса или же не выйдем за размеры списка
             while (result == null && currPosition < size) {
                 if (index == currPosition) {
-                    result = item.value;
+                    break;
                 }
                 item = item.next;
                 currPosition++;
@@ -63,19 +65,18 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
         else {
             while (result == null && currPosition >= 0) {
                 if (index == currPosition) {
-                    result = item.value;
+                    break;
                 }
                 item = item.prev;
                 currPosition--;
             }
         }
-        return result;
+
+        return item;
     }
 
     @Override
     public boolean remove( T item ) {
-        // TODO - реализовать.
-        // DONE
         int currPosition = 0;
         boolean result = false; //Если нашли и удалили - TRUE, иначе FALSE
         ListItem<T> searchItem = new ListItem<>();
@@ -115,27 +116,55 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
         return result;
     }
 
-    @Override
     //вытащить первый элемент из списка и удалить его
+    @Override
     public T poll() {
-        //TODO реализовать
-        //DONE
-
-        ListItem<T> listItem = new ListItem<T>();
+        ListItem<T> listItem;
 
         if(size != 0)
         {
             listItem = head;
 
-            ListItem<T> nextItem = listItem.next;
-            head = nextItem;
-            nextItem.prev = null;
+            if(size > 1) {
+                ListItem<T> nextItem = listItem.next;
+                head = nextItem;
+                nextItem.prev = null;
+            }
             size--;
         }
+        else {
+            return null;
+        }
 
-        return (T) listItem;
+        return listItem.value;
     }
 
+    //Алгоритм хитрой сортировки, чтобы не заниматься перелинковкой элементов
+    @Override
+    public void mySort() {
+        if(this.size == 0)
+        {
+            throw new RuntimeException("Нечего сортировать");
+        }
+
+        int tempArray[] = new int[size]; //массив int
+
+        //перегоняем все значения элементов связанного списка в наш массив
+        for (int i = 0; i < this.size; i++)
+        {
+            int value = (Integer) this.get(i);
+            tempArray[i] = value;
+        }
+
+        Arrays.sort(tempArray); //сортируем массив
+
+        //Перебиваем значения элементов списка согласно сортированному массиву
+        for(int j = 0; j < tempArray.length; j++) {
+            this.getItem(j).value = tempArray[j];
+        }
+    }
+
+    //Сортировка с лекции
     @Override
     public void sort() {
         boolean wasChange = true;
@@ -151,22 +180,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
         }
     }
 
-    @Override
-    //Алгоритм быстрой сортировки
-    public void quickSort() {
-        boolean wasChange = true;
-        while ( wasChange ){
-            wasChange = false;
-            ListItem<T> first = head;
-            ListItem<T> second = head.next;
-            while ( second != null ){
-                wasChange = wasChange || compareAndReplaceItem(first, second);
-                first = second;
-                second = second.next;
-            }
-        }
-    }
-
+    //Вспомогательная функция для сортировки с лекции
     private boolean compareAndReplaceItem( ListItem<T> first, ListItem<T> second ) {
         if (second.value.compareTo( first.value ) < 0){
             second.prev = first.prev;

@@ -13,10 +13,13 @@ public interface MyList<T extends Comparable<T>> {
     // Удалить первый элемент по совпадению. Если не найден - то false
     boolean remove(T item);
 
+    // Достать первый элемент из очереди и удалить его
+    T poll();
+
     // Допускаем, что T - comparable
-    // TODO реализовать другой алгоритм сортировки
     void sort();
 
-    // Пусть будет алгоритм быстрой сортировки
-    void quickSort();
+    // Собственный алгоритм сортировки
+    void mySort();
+
 }
