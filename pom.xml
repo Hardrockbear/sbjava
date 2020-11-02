@@ -10,6 +10,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>HelloWorld</module>
+      <module>Lesson_6</module>
   </modules>
 
   <name>sbjava</name>
