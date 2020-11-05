@@ -31,7 +31,7 @@
 
 ***G1GC***
 
-![](https://github.com/Hardrockbear/sbjava/blob/master/additional_files/GC/SerialGC.png?raw=true)
+![](https://github.com/Hardrockbear/sbjava/blob/master/additional_files/GC/G1GC.png?raw=true)
 
 **java.lang.OutOfMemoryError: Java heap space**
 Закончилось место для аллокации объектов
