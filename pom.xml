@@ -12,6 +12,7 @@
     <module>HelloWorld</module>
     <module>Lesson_6</module>
     <module>GC</module>
+    <module>Multithreading</module>
   </modules>
 
   <name>sbjava</name>
