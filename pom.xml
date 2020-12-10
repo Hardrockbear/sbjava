@@ -12,7 +12,6 @@
     <module>HelloWorld</module>
     <module>Lesson_6</module>
     <module>GC</module>
-    <module>H2DB</module>
   </modules>
 
   <name>sbjava</name>
