@@ -12,7 +12,6 @@
     <module>HelloWorld</module>
     <module>Lesson_6</module>
     <module>GC</module>
-      <module>TestFramework</module>
   </modules>
 
   <name>sbjava</name>
