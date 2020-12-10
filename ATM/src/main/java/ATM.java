@@ -32,7 +32,7 @@ public class ATM implements ATMOperation {
 
             for (Cell cell : cellList) //копия списка ячеек
             {
-                cellListTemp.add(cell.Copy());
+                cellListTemp.add(cell.copy());
             }
 
             for (int i = cellList.size() - 1; i >= 0; i--) //Идем по ячейкам и собираем запрошенную сумму наименьшим числом купюр

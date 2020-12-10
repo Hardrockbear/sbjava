@@ -1,5 +1,5 @@
 public interface CellOperation {
-    Cell Copy(); //копировать ячейку
+    Cell copy(); //копировать ячейку
     Denomination getDenomination(); //получить номинал
     void setAmount(int amount); //задать количество купюр в ячейке
     int getAmount(); //получить количество купюр в ячейке

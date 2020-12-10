@@ -1,6 +1,7 @@
 //ячейка для купюр
-public class Cell implements CellOperation{
-    private Denomination denomination;
+//public class Cell implements CellOperation{
+public class Cell implements CellOperation {
+    private final Denomination denomination;
     private int amount = 0;
 
     public Cell (Denomination denomination){
@@ -8,7 +9,7 @@ public class Cell implements CellOperation{
     }
 
     @Override
-    public Cell Copy() {
+    public Cell copy() {
         Cell cell = new Cell(this.denomination);
         cell.amount = this.amount;
         return cell;
