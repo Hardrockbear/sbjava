@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Library WebUI</title>
+</head>
+<body>
+    <div class="title">Library</div>
+    <div class="content">
+        <div class="filters">
+            <div class="table-title">Filters:</div>
+            <div>
+                <form id="edit-form" th:action="@{/filter}" th:method="get">
+                    <div class="row">
+                        <label for="holder-input">Author:</label>
+                        <select id="holder-input" name="author" >
+                            <option th:each="author : ${filter_authors}" th:value="${author.id}" th:utext="${author.name}"/>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="holder-input">Genre:</label>
+                        <select id="holder-input" name="genre" >
+                            <option th:each="genre : ${filter_genres}" th:value="${genre.id}" th:utext="${genre.name}"/>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <button class="save" type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
+            <form id="clear-form" th:action="@{/}" th:method="get">
+                <div class="row">
+                    <button class="save" type="submit">Clear</button>
+                </div>
+            </form>
+        </div>
+        <div class="table">
+            <div class="table-title">Books</div>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                </thead>
+                <tbody>
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.id}"/>
+                        <td th:text="${book.name}"/>
+                        <td th:text="${book.author.name}"/>
+                        <td th:text="${book.genre.name}"/>
+                        <td>
+                            <a class='edit' th:href="@{/book/edit(id=${book.id},type=${book.name})}" href="edit.html">Edit</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/book/delete(id=${book.id})}" method="POST">
+                                <button class='delete' type="submit">X</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <form th:action="@{/book/add}" method="GET">
+                    <button class='add' type="submit">Add Book</button>
+                </form>
+            </div>
+        </div>
+        <div class="table">
+            <div class="table-title">Authors</div>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                </thead>
+                <tbody>
+                    <tr th:each="author : ${authors}">
+                        <td th:text="${author.id}"/>
+                        <td th:text="${author.name}"/>
+                        <td>
+                            <a class='edit' th:href="@{/author/edit(id=${author.id})}" href="edit.html">Edit</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/author/delete(id=${author.id})}" method="POST">
+                                <button class='delete' type="submit">X</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <form th:action="@{/author/add}" method="GET">
+                    <button class='add' type="submit">Add Author</button>
+                </form>
+            </div>
+        </div>
+        <div class="table">
+            <div class="table-title">Genres</div>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                </thead>
+                <tbody>
+                    <tr th:each="genre : ${genres}">
+                        <td th:text="${genre.id}"/>
+                        <td th:text="${genre.name}"/>
+                        <td>
+                            <a class='edit' th:href="@{/genre/edit(id=${genre.id})}" href="editgenre.html">Edit</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/genre/delete(id=${genre.id})}" method="POST">
+                                <button class='delete' type="submit">X</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <form th:action="@{/genre/add}" method="GET">
+                    <button class='add' type="submit">Add Genre</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
