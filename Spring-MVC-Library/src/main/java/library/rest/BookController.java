@@ -53,4 +53,10 @@ public class BookController {
         bookRepository.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/book/comments")
+    public String commentPage (@RequestParam("id") int id, Model model){
+        model.addAttribute("book", bookRepository.findById(id).orElseThrow(NotFoundException::new));
+        return "bookcomments";
+    }
 }

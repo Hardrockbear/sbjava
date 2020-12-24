@@ -47,11 +47,13 @@
                 <tbody>
                     <tr th:each="book : ${books}">
                         <td th:text="${book.id}"/>
-                        <td th:text="${book.name}"/>
+                        <td>
+                            <a th:text="${book.name}" th:href="@{/book/comments(id=${book.id})}" href="bookcomments.html"></a>
+                        </td>
                         <td th:text="${book.author.name}"/>
                         <td th:text="${book.genre.name}"/>
                         <td>
-                            <a class='edit' th:href="@{/book/edit(id=${book.id},type=${book.name})}" href="edit.html">Edit</a>
+                            <a class='edit' th:href="@{/book/edit(id=${book.id})}" href="edit.html">Edit</a>
                         </td>
                         <td>
                             <form th:action="@{/book/delete(id=${book.id})}" method="POST">

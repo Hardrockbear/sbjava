@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,11 @@ public class Book {
         this.name = name;
         this.genre = genre;
         this.author = author;
+        this.comments = new ArrayList<Comment>();
+    }
+
+    public void addComment (String text){
+        this.comments.add(new Comment(text));
     }
 
     @PreRemove
