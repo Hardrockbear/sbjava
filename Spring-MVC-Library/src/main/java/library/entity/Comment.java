@@ -9,16 +9,16 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public class Genre {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NonNull
-    @Column (nullable = false,unique=true)
-    private String name;
+    @Column (nullable = false)
+    private String text;
 
-    public Genre(String name) {
-        this.name = name;
+    public Comment(String text){
+        this.text = text;
     }
 }

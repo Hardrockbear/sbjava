@@ -1,25 +1,35 @@
 package library.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NonNull
     @Column (nullable = false)
     private String name;
 
-    @OneToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Genre genre;
 
-    @OneToOne(targetEntity = Author.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Author author;
 
-    public Book() {}
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    private List<Comment> comments;
 
     public Book(String name, Genre genre, Author author) {
         this.name = name;
@@ -29,37 +39,7 @@ public class Book {
 
     @PreRemove
     public void onPreRemove() {
-        this.setGenre(null);
-        this.setAuthor(null);
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public int getId() { return id; }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.genre = null;
+        this.author = null;
     }
 }
