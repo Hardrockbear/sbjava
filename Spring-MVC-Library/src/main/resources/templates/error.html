@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Library Error Page</title>
+</head>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+    <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"></h1>
+    <p th:utext="${errorMessage}"></p>
+    <a href="index.html" th:href="@{/}">Back to Library Page</a>
+    <div><a href="logout.html" th:href="@{/logout}">Logout</a></div>
+</body>
+</html>
